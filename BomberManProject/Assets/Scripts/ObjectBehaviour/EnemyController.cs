@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyController : SimpleMoving
 {
-    int direction;
+    private int direction;
     void Start ()
     {
         direction = 0;

@@ -23,7 +23,7 @@ public class MapGenerator : Generator
         {
             for(int z=0; z < length; z++)
             {
-                Instantiate(EnvironmentTools.GetGround(), new Vector3(x, 0, z), Quaternion.identity);
+                Instantiate(EnvironmentTools.GetGround(), new Vector3(x, -0.5f, z), Quaternion.identity);
             }
         }
     }

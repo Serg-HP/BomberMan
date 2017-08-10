@@ -9,7 +9,7 @@ namespace Assets.Scripts
 {
     abstract public class SimpleMoving: BasicMoving
     {
-        public float speed;
+        protected float speed;
 
         public override void Move(Vector3 direction, int rotation)
         {

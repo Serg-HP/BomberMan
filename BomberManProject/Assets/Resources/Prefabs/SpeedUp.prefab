@@ -1,30 +1,42 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &138616
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1592891034019344}
+  m_IsPrefabParent: 1
+--- !u!1 &1592891034019344
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 438616}
-  - component: {fileID: 3338616}
-  - component: {fileID: 2338616}
-  - component: {fileID: 114385641562757562}
-  - component: {fileID: 135665914887351644}
+  - component: {fileID: 4284846268900422}
+  - component: {fileID: 33361811614861370}
+  - component: {fileID: 23484649056606678}
+  - component: {fileID: 114899861029381680}
+  - component: {fileID: 135394344076508588}
+  - component: {fileID: 114427440056945596}
   m_Layer: 0
-  m_Name: Lightning Blue
+  m_Name: SpeedUp
   m_TagString: SpeedUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &438616
+--- !u!4 &4284846268900422
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 138616}
+  m_GameObject: {fileID: 1592891034019344}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,12 +44,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &2338616
+--- !u!23 &23484649056606678
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 138616}
+  m_GameObject: {fileID: 1592891034019344}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -64,44 +76,45 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &3338616
+--- !u!33 &33361811614861370
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 138616}
+  m_GameObject: {fileID: 1592891034019344}
   m_Mesh: {fileID: 4300000, guid: 01859a6871245ce4d91e9163d99661ac, type: 3}
---- !u!1001 &100100000
-Prefab:
-  m_ObjectHideFlags: 1
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications: []
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 138616}
-  m_IsPrefabParent: 1
---- !u!114 &114385641562757562
+--- !u!114 &114427440056945596
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 138616}
+  m_GameObject: {fileID: 1592891034019344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a764dc8d05847ae438af292787bc452b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 748f63de8c02a451fbffd55e0069f3e1, type: 3}
+--- !u!114 &114899861029381680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1592891034019344}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5552221c545e45641a33a84f68f6f5ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &135665914887351644
+--- !u!135 &135394344076508588
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 138616}
+  m_GameObject: {fileID: 1592891034019344}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.2997665
+  m_Radius: 0.25
   m_Center: {x: 0.000000007450581, y: 0, z: 0}

@@ -40,17 +40,33 @@ namespace Assets.New_Folder.Basis
         {
             return Resources.Load("Prefabs/SpeedUp") as GameObject;
         }
+        public static GameObject GetSpeedUpEffect()
+        {
+            return Resources.Load("Prefabs/SpeedUpEffect") as GameObject;
+        }
         public static GameObject GetFlameUp()
         {
             return Resources.Load("Prefabs/FlameUp") as GameObject;
+        }
+        public static GameObject GetFlameUpEffect()
+        {
+            return Resources.Load("Prefabs/FlameUpEffect") as GameObject;
         }
         public static GameObject GetBombUp()
         {
             return Resources.Load("Prefabs/BombUp") as GameObject;
         }
+        public static GameObject GetBombUpEffect()
+        {
+            return Resources.Load("Prefabs/BombUpEffect") as GameObject;
+        }
         public static GameObject GetWallPass()
         {
             return Resources.Load("Prefabs/WallPass") as GameObject;
+        }
+        public static GameObject GetWallPassEffect()
+        {
+            return Resources.Load("Prefabs/WallPassEffect") as GameObject;
         }
     }
 }

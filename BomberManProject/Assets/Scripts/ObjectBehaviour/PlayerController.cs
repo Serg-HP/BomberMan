@@ -7,20 +7,12 @@ using UnityEngine.UI;
 
 public class PlayerController : SimpleMoving
 {
-    public AudioClip pickUpSound;
-
-    private int bombLimit;
-    private float speedLimit = 0.25f;
-    private bool wallPass;
+    private static int bombLimit;
+    private static float speedLimit = 0.25f;
+    private static bool wallPass;
 
     private Text stateText;
-    private AudioSource source;
-    private float volume = 1;
 
-    void Awake()
-    {
-        source = GetComponent<AudioSource>();
-    }
     void Start ()
     {
         stateText = GameObject.FindGameObjectWithTag("Text").GetComponent<Text>();
@@ -58,7 +50,13 @@ public class PlayerController : SimpleMoving
         GameObject[] go = GameObject.FindGameObjectsWithTag("Bomb");
         if (go.Length <= bombLimit)
         {
-            Vector3 bombposition = new Vector3(Mathf.RoundToInt(transform.position.x), transform.position.y, Mathf.RoundToInt(transform.position.z));
+            Vector3 bombposition = new Vector3(Mathf.RoundToInt(transform.position.x), 0, Mathf.RoundToInt(transform.position.z));
+            if (wallPass == true)
+            {
+                Collider[] hitColliders = Physics.OverlapSphere(bombposition, 0.1f);
+                if (hitColliders.Length > 1)
+                    return;
+            }
             Instantiate(EnvironmentTools.GetBomb(), bombposition, Quaternion.identity);
         }
     }
@@ -66,55 +64,58 @@ public class PlayerController : SimpleMoving
     {
         MakeAction();
     }
-    public void IncreaseBombNumber()
+    public static void IncreaseBombNumber()
     {
         bombLimit++;
     }
     public void IncreaseSpeed()
     {
-        speed+=0.05f;
+        if (speed < speedLimit)
+            speed +=0.05f;
+    }
+    public static void SetWallPassActive()
+    {
+        wallPass = true;
     }
     void OnCollisionEnter(Collision hit)
     {
         var tag = hit.gameObject.tag;
+        GameObject gameobj;
+        var position = new Vector3(transform.position.x, 2, transform.position.z);
         switch (tag)
         {
             case "BombUp":
-                IncreaseBombNumber();
-                Destroy(hit.gameObject);
                 StartCoroutine(ShowBonus(tag));
+                gameobj = Instantiate(EnvironmentTools.GetBombUpEffect(), position, Quaternion.identity);
+                Destroy(gameobj, 2);
                 break;
             case "FlameUp":
-                BombController.IncreasePower();
-                Destroy(hit.gameObject);
                 StartCoroutine(ShowBonus(tag));
+                gameobj = Instantiate(EnvironmentTools.GetFlameUpEffect(), position, Quaternion.identity);
+                Destroy(gameobj, 2);
                 break;
             case "SpeedUp":
-                if (speed<speedLimit)
-                    IncreaseSpeed();
-                Destroy(hit.gameObject);
                 StartCoroutine(ShowBonus(tag));
+                gameobj = Instantiate(EnvironmentTools.GetSpeedUpEffect(), position, Quaternion.identity);
+                Destroy(gameobj, 2);
                 break;
             case "WallPass":
-                wallPass = true;
-                Destroy(hit.gameObject);
                 StartCoroutine(ShowBonus(tag));
+                gameobj = Instantiate(EnvironmentTools.GetWallPassEffect(), position, Quaternion.identity);
+                Destroy(gameobj, 2);
                 break;
             case "BreakWall":
                 if (wallPass)
-                    Physics.IgnoreCollision(hit.collider, GetComponent<SphereCollider>()); 
+                    Physics.IgnoreCollision(hit.collider, gameObject.GetComponent<CapsuleCollider>());
                 break;
         }
     }
-
-    IEnumerator ShowBonus(string tag)
+    private IEnumerator ShowBonus(string tag)
     {
-        source.PlayOneShot(pickUpSound, volume);
         stateText.enabled = true;
         stateText.text = "You got " + tag;
         yield return new WaitForSeconds(2);
         stateText.enabled = false;
-        
     }
 
 }
