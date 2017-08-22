@@ -9,18 +9,23 @@ namespace Assets.Scripts
 {
     class BombController: MonoBehaviour
     {
+        public AudioClip explosionSound;
         private static int explosionLength = 1;
         private float lifespan = 2;
         private SphereCollider collider;
+        private AudioSource source;
         void Start()
         {
             collider = gameObject.GetComponent<SphereCollider>();
+            source = gameObject.GetComponent<AudioSource>();
+            Invoke("PlayExplosionSound", lifespan-0.3f);
             Invoke("MakeExplosion", lifespan);
             Destroy(collider.gameObject,lifespan);
         }
 
         private void MakeExplosion()
         {
+            float killDelay = 0;
             List<Ray> rayList = CreateExplosionArea();
             RaycastHit hit;
             ShowExplosion(Vector3.zero,1);
@@ -30,7 +35,8 @@ namespace Assets.Scripts
                 {
                     if (IsDestroyable(hit))
                     {
-                        Destroy(hit.collider.gameObject);
+                        KillDynamicObject(hit,ref killDelay);
+                        Destroy(hit.collider.gameObject, killDelay);
                         ShowExplosion(ray.direction, explosionLength);
                     }
                 }
@@ -63,6 +69,33 @@ namespace Assets.Scripts
         private bool IsDestroyable(RaycastHit hit)
         {
             return hit.collider.tag == "BreakWall" || hit.collider.tag == "Enemy" || hit.collider.tag == "Player";
+        }
+        private void PlayExplosionSound()
+        {
+            source.PlayOneShot(explosionSound);
+        }
+
+        private void KillDynamicObject(RaycastHit hit, ref float killDelay)
+        {
+            if (hit.collider.tag == "Enemy")
+            {
+                Animator animatorEnemy = hit.collider.gameObject.GetComponent<Animator>();
+                GameObject go = hit.collider.gameObject;
+                EnemyController other = (EnemyController)go.GetComponent(typeof(EnemyController));
+                other.enabled = false;
+                //other.SetDelay();
+                animatorEnemy.speed = 1.5f;
+                animatorEnemy.SetTrigger("IsDead");
+                killDelay = 2;
+            }
+            if (hit.collider.tag == "Player")
+            {
+                PlayerController.SetDead();
+                Animator animatorPlayer = hit.collider.gameObject.GetComponent<Animator>();
+                animatorPlayer.SetTrigger("IsDead");
+                killDelay = 2;
+            }
+            hit.collider.enabled = false;
         }
 
         private void OnTriggerExit(Collider other)

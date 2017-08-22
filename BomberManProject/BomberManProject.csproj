@@ -85,21 +85,29 @@
     <Compile Include="Assets\Scripts\Basic\SimpleMoving.cs" />
     <Compile Include="Assets\Scripts\Basic\SimpleRotationScript.cs" />
     <Compile Include="Assets\Scripts\Basic\StepPlayerMoving.cs" />
+    <Compile Include="Assets\Scripts\HZ.cs" />
     <Compile Include="Assets\Scripts\ObjectBehaviour\BombController.cs" />
     <Compile Include="Assets\Scripts\ObjectBehaviour\Bonuses\BombUpBonus.cs" />
+    <Compile Include="Assets\Scripts\ObjectBehaviour\Bonuses\Bonus.cs" />
     <Compile Include="Assets\Scripts\ObjectBehaviour\Bonuses\FlameUpBonus.cs" />
     <Compile Include="Assets\Scripts\ObjectBehaviour\Bonuses\SpeedUpBonus.cs" />
     <Compile Include="Assets\Scripts\ObjectBehaviour\Bonuses\WallPassBonus.cs" />
     <Compile Include="Assets\Scripts\ObjectBehaviour\EnemyController.cs" />
+    <Compile Include="Assets\Scripts\ObjectBehaviour\ExitController.cs" />
     <Compile Include="Assets\Scripts\ObjectBehaviour\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\ObjectBehaviour\SmartEnemyController.cs" />
     <Compile Include="Assets\Scripts\ObjectGeneration\DynamicObjectGenerator.cs" />
     <Compile Include="Assets\Scripts\ObjectGeneration\Generator.cs" />
     <Compile Include="Assets\Scripts\ObjectGeneration\MapCreator.cs" />
     <Compile Include="Assets\Scripts\ObjectGeneration\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\ObjectGeneration\PowerUpGenerator.cs" />
+    <Compile Include="Assets\Scripts\PathFinding\Astar.cs" />
     <Compile Include="Assets\Scripts\PathFinding\Grid.cs" />
     <Compile Include="Assets\Scripts\PathFinding\Node.cs" />
     <Compile Include="Assets\Scripts\PathFinding\PathFinder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\SciFi_Door\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

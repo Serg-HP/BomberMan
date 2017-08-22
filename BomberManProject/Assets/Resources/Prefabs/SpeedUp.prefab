@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 748f63de8c02a451fbffd55e0069f3e1, type: 3}
+  gameObj: {fileID: 1000013285955420, guid: f2746ecdf91f3ef4ea1bd22d8e19f9e8, type: 2}
 --- !u!114 &114899861029381680
 MonoBehaviour:
   m_ObjectHideFlags: 1

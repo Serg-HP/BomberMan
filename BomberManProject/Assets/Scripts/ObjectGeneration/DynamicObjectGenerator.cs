@@ -17,7 +17,7 @@ namespace Assets.Scripts
             int x = 0;
             int z = 0;
             GetFreeCoordinates(out x, out z);
-            Instantiate(EnvironmentTools.GetPlayer(), new Vector3(x, 0, z), Quaternion.identity);
+            Instantiate(EnvironmentTools.GetPlayer(), new Vector3(x, -0.5f, z), Quaternion.identity);
             Matrix[x, z] = 1;
         }
 
@@ -28,7 +28,19 @@ namespace Assets.Scripts
                 int x;
                 int z;
                 base.GetFreeCoordinates(out x, out z);
-                Instantiate(EnvironmentTools.GetEnemy(), new Vector3(x, 0, z), Quaternion.identity);
+                Instantiate(EnvironmentTools.GetEnemy(), new Vector3(x, -0.5f, z), Quaternion.identity);
+                Matrix[x, z] = 1;
+            }
+        }
+
+        public void CreateSmartEnemy(int number)
+        {
+            for (int k = 0; k < number; k++)
+            {
+                int x;
+                int z;
+                base.GetFreeCoordinates(out x, out z);
+                Instantiate(EnvironmentTools.GetSmartEnemy(), new Vector3(x, -0.5f, z), Quaternion.identity);
                 Matrix[x, z] = 1;
             }
         }

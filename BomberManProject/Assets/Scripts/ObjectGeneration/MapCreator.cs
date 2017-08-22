@@ -16,6 +16,7 @@ public class MapCreator : MonoBehaviour {
     public int breakWallNumber;
     public GenerationMethod method;
     public int enemyNumber;
+    public int smartEnemyNumber;
     void Start ()
     {
         MapGenerator newMap = new MapGenerator(width,length,breakWallNumber);
@@ -27,8 +28,10 @@ public class MapCreator : MonoBehaviour {
         DynamicObjectGenerator dynamicOG = new DynamicObjectGenerator(newMap.GetMatrix(), width, length);
         dynamicOG.CreatePlayer();
         dynamicOG.CreateEnemy(enemyNumber);
+        dynamicOG.CreateSmartEnemy(smartEnemyNumber);
         PowerUpGenerator powerUpGen = new PowerUpGenerator(newMap.GetMatrix(), width, length);
         powerUpGen.SetPowerUps();
+        powerUpGen.SetExit();
 
     }
 

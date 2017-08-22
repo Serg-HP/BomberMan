@@ -20,13 +20,21 @@ namespace Assets.New_Folder.Basis
         {
             return Resources.Load("Prefabs/ConcreteWall") as GameObject;
         }
+        public static GameObject GetExit()
+        {
+            return Resources.Load("Prefabs/Exit") as GameObject;
+        }
         public static GameObject GetPlayer()
         {
-            return Resources.Load("Prefabs/Player") as GameObject;
+            return Resources.Load("Prefabs/Devil") as GameObject;
         }
         public static GameObject GetEnemy()
         {
-            return Resources.Load("Prefabs/Enemy") as GameObject;
+            return Resources.Load("Prefabs/Skeleton") as GameObject;
+        }
+        public static GameObject GetSmartEnemy()
+        {
+            return Resources.Load("Prefabs/SmartSkeleton") as GameObject;
         }
         public static GameObject GetBomb()
         {

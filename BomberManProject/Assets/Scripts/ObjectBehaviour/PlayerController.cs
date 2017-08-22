@@ -7,42 +7,65 @@ using UnityEngine.UI;
 
 public class PlayerController : SimpleMoving
 {
+    private AudioSource source;
+    public AudioClip setBombSound;
+    public AudioClip flySound;
+    public AudioClip deathSound;
     private static int bombLimit;
     private static float speedLimit = 0.25f;
     private static bool wallPass;
+    private static bool isAlive=true;
 
-    private Text stateText;
 
     void Start ()
     {
-        stateText = GameObject.FindGameObjectWithTag("Text").GetComponent<Text>();
         bombLimit = 0;
         speed = 0.1f;
         wallPass = false;
-        //rb = GetComponent<Rigidbody>();
+        source = gameObject.GetComponent<AudioSource>();
+    }
+    private void OnDestroy()
+    {
+        var resultText = GameObject.Find("ResultText").GetComponent<Text>();
+        resultText.text = "GameOver!!!";
+        Application.Quit();
     }
 
     private void MakeAction()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
+        Animator animatorPlayer = gameObject.GetComponent<Animator>();
+        if (Input.anyKey)
         {
-            MoveLeft();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                animatorPlayer.SetTrigger("SetBomb");
+                PutBomb();
+            }
+            else
+            {
+                //animatorPlayer.SetTrigger("IsWalk");
+                animatorPlayer.SetFloat("Walk", 1);
+                if (Input.GetKey(KeyCode.LeftArrow))
+                {
+                    MoveLeft();
+                }
+                if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    MoveRight();
+                }
+                if (Input.GetKey(KeyCode.UpArrow))
+                {
+                    MoveUp();
+                }
+                if (Input.GetKey(KeyCode.DownArrow))
+                {
+                    MoveDown();
+                }
+            }
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        else
         {
-            MoveRight();
-        }
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            MoveUp();
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            MoveDown();
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            PutBomb();
+            animatorPlayer.SetFloat("Walk", 0);
         }
     }
     private void PutBomb()
@@ -62,7 +85,8 @@ public class PlayerController : SimpleMoving
     }
 	void Update ()
     {
-        MakeAction();
+        if (isAlive)
+            MakeAction();
     }
     public static void IncreaseBombNumber()
     {
@@ -77,45 +101,31 @@ public class PlayerController : SimpleMoving
     {
         wallPass = true;
     }
+
+    public static void SetDead()
+    {
+        isAlive = false;
+        
+    }
+
+    private void PlayFlySound()
+    {
+        source.PlayOneShot(flySound);
+    }
+    private void PlaySetBombSound()
+    {
+        source.PlayOneShot(setBombSound);
+    }
+    private void PlayDeathSound()
+    {
+        source.PlayOneShot(deathSound);
+    }
     void OnCollisionEnter(Collision hit)
     {
         var tag = hit.gameObject.tag;
-        GameObject gameobj;
-        var position = new Vector3(transform.position.x, 2, transform.position.z);
-        switch (tag)
-        {
-            case "BombUp":
-                StartCoroutine(ShowBonus(tag));
-                gameobj = Instantiate(EnvironmentTools.GetBombUpEffect(), position, Quaternion.identity);
-                Destroy(gameobj, 2);
-                break;
-            case "FlameUp":
-                StartCoroutine(ShowBonus(tag));
-                gameobj = Instantiate(EnvironmentTools.GetFlameUpEffect(), position, Quaternion.identity);
-                Destroy(gameobj, 2);
-                break;
-            case "SpeedUp":
-                StartCoroutine(ShowBonus(tag));
-                gameobj = Instantiate(EnvironmentTools.GetSpeedUpEffect(), position, Quaternion.identity);
-                Destroy(gameobj, 2);
-                break;
-            case "WallPass":
-                StartCoroutine(ShowBonus(tag));
-                gameobj = Instantiate(EnvironmentTools.GetWallPassEffect(), position, Quaternion.identity);
-                Destroy(gameobj, 2);
-                break;
-            case "BreakWall":
-                if (wallPass)
-                    Physics.IgnoreCollision(hit.collider, gameObject.GetComponent<CapsuleCollider>());
-                break;
-        }
-    }
-    private IEnumerator ShowBonus(string tag)
-    {
-        stateText.enabled = true;
-        stateText.text = "You got " + tag;
-        yield return new WaitForSeconds(2);
-        stateText.enabled = false;
+        if (tag== "BreakWall")
+            if (wallPass)
+                Physics.IgnoreCollision(hit.collider, gameObject.GetComponent<CapsuleCollider>());
     }
 
 }

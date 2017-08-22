@@ -57,5 +57,13 @@ namespace Assets.Scripts.ObjectGeneration
                 Matrix[x, z] = 3;
             }
         }
+        public void SetExit()
+        {
+            int x = 0;
+            int z = 0;
+            GetFreeCoordinates(out x, out z);
+            Instantiate(EnvironmentTools.GetExit(), new Vector3(x, -0.5f, z), Quaternion.identity);
+            Matrix[x, z] = 3;
+        }
     }
 }

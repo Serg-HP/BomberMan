@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 573379e26325b4b08ac38818236ca6c3, type: 3}
+  gameObj: {fileID: 1000012826572674, guid: 6a2d4546cffca1c4d93e0b7ea62a17a4, type: 2}
 --- !u!135 &135722444049665984
 SphereCollider:
   m_ObjectHideFlags: 1
