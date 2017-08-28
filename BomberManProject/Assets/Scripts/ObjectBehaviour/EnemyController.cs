@@ -13,7 +13,7 @@ public class EnemyController : SimpleMoving
     void Start ()
     {
         direction = 0;
-        speed = 0.05f;
+        speed = 0.025f;
         Animator animatorEnemy = gameObject.GetComponent<Animator>();
         animatorEnemy.SetFloat("Walk", 1);
         source = gameObject.GetComponent<AudioSource>();

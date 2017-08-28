@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.1.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -81,11 +79,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Basic\BasicMoving.cs" />
+    <Compile Include="Assets\Scripts\Basic\CameraController.cs" />
     <Compile Include="Assets\Scripts\Basic\EnvironmentTools.cs" />
     <Compile Include="Assets\Scripts\Basic\SimpleMoving.cs" />
     <Compile Include="Assets\Scripts\Basic\SimpleRotationScript.cs" />
     <Compile Include="Assets\Scripts\Basic\StepPlayerMoving.cs" />
-    <Compile Include="Assets\Scripts\HZ.cs" />
     <Compile Include="Assets\Scripts\ObjectBehaviour\BombController.cs" />
     <Compile Include="Assets\Scripts\ObjectBehaviour\Bonuses\BombUpBonus.cs" />
     <Compile Include="Assets\Scripts\ObjectBehaviour\Bonuses\Bonus.cs" />

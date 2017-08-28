@@ -50,27 +50,26 @@ namespace Assets.Scripts.PathFinding
        public Node[,] CreateGrid()
         {
             grid = new Node[gridSizeX, gridSizeY];
-            GameObject[] breakWalls = GameObject.FindGameObjectsWithTag("BreakWall");
-            GameObject[] concreteWalls = GameObject.FindGameObjectsWithTag("ConcreteWall");
 
-            for(int x=0; x<gridSizeX; x++)
+            for (int x=0; x<gridSizeX; x++)
                 for (int y = 0; y < gridSizeY; y++)
                     grid[x, y] = new Node(true, x, y);
+            MarkObjects("BreakWall");
+            MarkObjects("ConcreteWall");
+            MarkObjects("Bomb");
 
-            foreach (GameObject obj in breakWalls)
-            {
-                int x = Mathf.RoundToInt(obj.transform.position.x);
-                int y = Mathf.RoundToInt(obj.transform.position.z);
-                grid[x, y] = new Node(false, x, y);
-            }
-
-            foreach (GameObject obj in concreteWalls)
-            {
-                int x = Mathf.RoundToInt(obj.transform.position.x);
-                int y = Mathf.RoundToInt(obj.transform.position.z);
-                grid[x, y] = new Node(false, x, y);
-            }
             return grid;
+        }
+
+        private void MarkObjects(string tag)
+        {
+            GameObject[] objectArray = GameObject.FindGameObjectsWithTag(tag);
+            foreach (GameObject obj in objectArray)
+            {
+                int x = Mathf.RoundToInt(obj.transform.position.x);
+                int y = Mathf.RoundToInt(obj.transform.position.z);
+                grid[x, y] = new Node(false, x, y);
+            }
         }
 
     }
